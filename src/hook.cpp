@@ -48,11 +48,11 @@ using namespace AsmJit;
 // ============================================================================
 // >> CHook
 // ============================================================================
-CHook::CHook(void* pFunc, ICallingConvention* pConvention)
+CHook::CHook(void* pFunc, std::shared_ptr<ICallingConvention> pConvention)
 {
 	m_pFunc = pFunc;
 	m_pRegisters = new CRegisters(pConvention->GetRegisters());
-	m_pCallingConvention = pConvention;
+	m_pCallingConvention = std::move(pConvention);
 
 	unsigned char* pTarget = (unsigned char *) pFunc;
 
@@ -96,7 +96,6 @@ CHook::~CHook()
 	MemoryManager::getGlobal()->free(m_pNewRetAddr);
 
 	delete m_pRegisters;
-	delete m_pCallingConvention;
 }
 
 void CHook::AddCallback(HookType_t eHookType, HookHandlerFn* pCallback)

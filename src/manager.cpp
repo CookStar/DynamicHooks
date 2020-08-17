@@ -37,7 +37,7 @@
 // ============================================================================
 // >> CHookManager
 // ============================================================================
-CHook* CHookManager::HookFunction(void* pFunc, ICallingConvention* pConvention)
+CHook* CHookManager::HookFunction(void* pFunc, const std::shared_ptr<ICallingConvention>& pConvention)
 {
 	if (!pFunc)
 		return NULL;
@@ -45,7 +45,6 @@ CHook* CHookManager::HookFunction(void* pFunc, ICallingConvention* pConvention)
 	CHook* pHook = FindHook(pFunc);
 	if (pHook)
 	{
-		delete pConvention;
 		return pHook;
 	}
 	

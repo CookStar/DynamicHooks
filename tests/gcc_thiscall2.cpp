@@ -31,6 +31,8 @@
 // ============================================================================
 // >> INCLUDES
 // ============================================================================
+#include <memory>
+
 #include "assert.h"
 
 #include "manager.h"
@@ -104,7 +106,7 @@ int main()
 	// Hook the function
 	CHook* pHook = pHookMngr->HookFunction(
 		(void *&) MyFunc,
-		new x86GccThiscall(vecArgTypes, DATA_TYPE_INT)
+		std::make_shared<x86GccThiscall>(vecArgTypes, DATA_TYPE_INT)
 	);
 
 	pHook->AddCallback(HOOKTYPE_PRE, (HookHandlerFn *) (void *) &PreMyFunc);
