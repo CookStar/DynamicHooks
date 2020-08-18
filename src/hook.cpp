@@ -48,11 +48,11 @@ using namespace AsmJit;
 // ============================================================================
 // >> CHook
 // ============================================================================
-CHook::CHook(void* pFunc, std::shared_ptr<ICallingConvention> pConvention)
+CHook::CHook(void* pFunc, const std::shared_ptr<ICallingConvention>& pConvention)
 {
 	m_pFunc = pFunc;
 	m_pRegisters = new CRegisters(pConvention->GetRegisters());
-	m_pCallingConvention = std::move(pConvention);
+	m_pCallingConvention = pConvention;
 
 	unsigned char* pTarget = (unsigned char *) pFunc;
 
