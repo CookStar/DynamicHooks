@@ -1,13 +1,13 @@
 mkdir .\Build\vs2010-x86
 cd .\Build\vs2010-x86
 cmake ..\..\src -G"Visual Studio 10" || goto :error
-msbuild DynamicHooks.sln /p:Configuration=Release /p:VCTargetsPath="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0" || goto :error
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe" DynamicHooks.sln /p:Configuration=Release /p:VCTargetsPath="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0" || goto :error
 cd ..\..
 
 mkdir .\Build\vs2010-x86-tests
 cd .\Build\vs2010-x86-tests
 cmake ..\..\tests -G"Visual Studio 10" || goto :error
-msbuild Tests.sln /p:Configuration=Release /p:VCTargetsPath="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0" || goto :error
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe" Tests.sln /p:Configuration=Release /p:VCTargetsPath="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0" || goto :error
 cd ..\..
 
 python3 run_tests.py Build/vs2010-x86-tests/Release || goto :error
